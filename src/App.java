@@ -57,35 +57,56 @@ import java.util.*;
  */
 
 //SAMPLE USAGE: A+
-/** The magic number is 2. Shh! Don't tell anyone
- *  Enter a guess:
- *  10
- *  Way off!
- *  Enter a guess:
- *  3
- *  Very close!
- *  Enter a guess:
- *  2
- *  It took you 3 guesses.
+/**
+ * The magic number is 2. Shh! Don't tell anyone
+ * Enter a guess:
+ * 10
+ * Way off!
+ * Enter a guess:
+ * 3
+ * Very close!
+ * Enter a guess:
+ * 2
+ * It took you 3 guesses.
  */
-
-
 
 public class App {
     public static void main(String[] args) throws Exception {
-        //DO NOT TOUCH THE THREE LINES BELOW
+        // DO NOT TOUCH THE THREE LINES BELOW
         int magicNumber = getMeARandomNumber();
-        System.out.println("The magic number is "+ magicNumber + ". Shh! Don't tell anyone");
+        System.out.println("The magic number is " + magicNumber + ". Shh! Don't tell anyone");
         Scanner reader = new Scanner(System.in);
 
-        //WRITE YOUR CODE IN THE SPACE BELOW
+        int numOfguesses = 0;
+        while (true) {
+            System.out.println("Enter a guess:");
+            int guess = Integer.valueOf(reader.nextLine());
+            if (guess < 1 || guess > 10) {
+                System.out.println("Invalid.");
+                continue;
+            } else if (guess == magicNumber) {
+                numOfguesses = numOfguesses + 1;
+                break;
+            } else if (guess != magicNumber && guess > magicNumber + 5
+                    || guess != magicNumber && guess < magicNumber - 5) {
+                System.out.println("Way off!");
+                numOfguesses = numOfguesses + 1;
+                continue;
+            } else if (guess != magicNumber && guess >= magicNumber - 2
+                    || guess != magicNumber && guess <= magicNumber + 2) {
+                System.out.println("Very close!");
+                numOfguesses = numOfguesses + 1;
+                continue;
+            } else {
+                numOfguesses = numOfguesses + 1;
+            }
+        }
+        System.out.println("It took you " + numOfguesses + " guesses.");
 
-        
     }
 
-
-    //Do not modify!!!
-    public static int getMeARandomNumber(){
+    // Do not modify!!!
+    public static int getMeARandomNumber() {
         Random random = new Random();
         return random.nextInt(10) + 1;
     }
